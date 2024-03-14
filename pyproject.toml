@@ -25,6 +25,8 @@ cowsay = "~=6.1"
 erpnext = "^12.14.0"
 # https://github.com/ultralytics/ultralytics/blob/main/LICENSE
 ultralytics = "^8.1.27"
+# https://pypi.org/project/anarchy-bot/
+anarchy-bot = "^24.2.4"
 
 # No specific license https://github.com/dpgaspar/Flask-AppBuilder/blob/master/LICENSE
 flask-appbuilder = "^3.3.2"
