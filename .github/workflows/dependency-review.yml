@@ -30,38 +30,20 @@ jobs:
       # The configuration here is verbose so the behavior should be more self-documenting.
       - uses: actions/dependency-review-action@v4
         with:
-          # # default for license-check is true
-          # license-check: true
-          # # default for vulnerabity-check is true
-          # vulnerability-check: true
-          # # this will fail if the security advisory databse has a minimum level of "fail-on-severity" value or higher.
-          # fail-on-severity: low
-          # comment-summary-in-pr: "on-failure"
-          # # Deny specific packages. Any number of packages to block in a PR. Must be in purl format.
-          # # BUG! This does not cause an error. It's flagged on the console, but should fail the PR check.
-          # deny-packages: "pkg:pypi/pycrypto" 
-          # # Deny all copy-left licenses.  NOTE: Not supported for use with GitHub Enterprise Server. 
-          # # License identifiers can be found here: https://spdx.org/licenses/
-          # # BUG: There is no way to fail on an unknown license
-          # deny-licenses: "GPL-1.0, GPL-2.0, GPL-3.0, AGPL-1.0, AGPL-3.0, LGPL-2.1, LGPL-3.0, MPL-2.0, CDDL-1.0, EPL-1.0"
-          # # License types to explicitly allow. NOTE: Not supported for use with GitHub Enterprise Server
-          # ## allow-licenses: ""
-          # # Allow list of packages that may have failed a license check but are explicitly OK. NOTE: Not supported for use with GitHub Enterprise Server
-          # allow-dependencies-licenses: "pkg:pypi/erpnext, pkg:pypi/flask-oidc-ex"
-          # # When set to true, the action will output information about all the known OpenSSF Scorecard scores for the dependencies changed in this pull request.
-          # # BUG: This option give this warning causing the rest of the checks to not work properly (no errors) Unexpected input(s) 'show-openssf-scorecard-levels', valid inputs are ['repo-token', 'fail-on-severity', 'fail-on-scopes', 'base-ref', 'head-ref', 'config-file', 'allow-licenses', 'deny-licenses', 'allow-dependencies-licenses', 'allow-ghsas', 'external-repo-token', 'license-check', 'vulnerability-check', 'comment-summary-in-pr', 'deny-packages', 'deny-groups', 'retry-on-snapshot-warnings', 'retry-on-snapshot-warnings-timeout', 'warn-only']
-          # # show-openssf-scorecard-levels: true
-
-          # this will fail if the security advisory databse has a minimum level of "fail-on-severity" value or higher.
+          # this will fail if the security advisory database has a minimum level of "fail-on-severity" value or higher.
           fail-on-severity: high
           # This will show a summary of the results in the PR only when there's a failure
+          # If a report is present, it will only contain checks for package managers that are part of the PR and only for those dependencies that have been changes/added.
           comment-summary-in-pr: "on-failure"
           # Deny specific packages
-          deny-packages: "pkg:pypi/pycrypto"
+          deny-packages: "pkg:pypi/pycrypto, pkg:pypi/anarchy-bot"
           # Deny all copy-left licenses
+          # BUG: There is no way to fail on an unknown license. If we could fail on an unknown license we could force a review and either allow the dependeices or deny the request.
+          # Over 10% of python packages are shipped without a license: https://snyk.io/blog/over-10-of-python-packages-on-pypi-are-distributed-without-any-license/
           deny-licenses: "GPL-1.0, GPL-2.0, GPL-3.0, AGPL-1.0, AGPL-3.0, LGPL-2.1, LGPL-3.0, MPL-2.0, CDDL-1.0, EPL-1.0"
           # # BUG: This option is flagged as unknown
           # show-openssf-scorecard-levels: true
           # Allow list of packages that may have failed a license check but are explicitly OK. NOTE: Not supported for use with GitHub Enterprise Server
+          # If a report is in the PR, it will say "Excluded from license check: pkg:pypi/paramiko"
           allow-dependencies-licenses: "pkg:pypi/paramiko"
           
