@@ -15,8 +15,13 @@ python = ">=3.10,<3.13"
 # #### AGPL ####
 # https://github.com/tesla-ce/python-client/blob/main/LICENSE
 tesla-ce-client = "^0.0.1"
+# https://pypi.org/project/meditate/
 # https://github.com/yuvallanger/meditate/blob/master/LICENSE.txt
 meditate = "^0.0.3"
+# https://pypi.org/project/anarchy-bot/
+# https://github.com/gmankab/anarchy_bot/blob/main/license
+# !!!!!! Here's an example where the license cannot be detected because it's not in the Meta info in PyPi
+anarchy-bot = "^24.2.1"
 
 # ####### GPL 3.0 ########
 # GPL 3.0: https://github.com/VaasuDevanS/cowsay-python/blob/main/LICENSE
@@ -25,8 +30,6 @@ cowsay = "~=5.0"
 erpnext = "^11.12.0"
 # https://github.com/ultralytics/ultralytics/blob/main/LICENSE
 ultralytics = "^7.1.23"
-# https://pypi.org/project/anarchy-bot/
-anarchy-bot = "^24.2.1"
 
 # No specific license https://github.com/dpgaspar/Flask-AppBuilder/blob/master/LICENSE
 flask-appbuilder = "^3.1.1"

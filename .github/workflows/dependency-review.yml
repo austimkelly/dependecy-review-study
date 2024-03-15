@@ -53,11 +53,13 @@ jobs:
           # # show-openssf-scorecard-levels: true
 
           # this will fail if the security advisory databse has a minimum level of "fail-on-severity" value or higher.
-          fail-on-severity: low
+          fail-on-severity: high
+          # This will show a summary of the results in the PR only when there's a failure
           comment-summary-in-pr: "on-failure"
           # Deny specific packages
           deny-packages: "pkg:pypi/pycrypto"
           # Deny all copy-left licenses
           deny-licenses: "GPL-1.0, GPL-2.0, GPL-3.0, AGPL-1.0, AGPL-3.0, LGPL-2.1, LGPL-3.0, MPL-2.0, CDDL-1.0, EPL-1.0"
-          
+          # # BUG: This option give this warning causing the rest of the checks to not work properly (no errors) Unexpected input(s) 'show-openssf-scorecard-levels', valid inputs are ['repo-token', 'fail-on-severity', 'fail-on-scopes', 'base-ref', 'head-ref', 'config-file', 'allow-licenses', 'deny-licenses', 'allow-dependencies-licenses', 'allow-ghsas', 'external-repo-token', 'license-check', 'vulnerability-check', 'comment-summary-in-pr', 'deny-packages', 'deny-groups', 'retry-on-snapshot-warnings', 'retry-on-snapshot-warnings-timeout', 'warn-only']
+          show-openssf-scorecard-levels: true
           
