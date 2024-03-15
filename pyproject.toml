@@ -20,25 +20,25 @@ meditate = "^0.0.4"
 
 # ####### GPL 3.0 ########
 # GPL 3.0: https://github.com/VaasuDevanS/cowsay-python/blob/main/LICENSE
-cowsay = "~=6.1"
+cowsay = "~=6.0"
  # https://github.com/frappe/erpnext/blob/develop/license.txt
-erpnext = "^12.14.0"
+erpnext = "^12.13.0"
 # https://github.com/ultralytics/ultralytics/blob/main/LICENSE
-ultralytics = "^8.1.27"
+ultralytics = "^8.1.23"
 # https://pypi.org/project/anarchy-bot/
-anarchy-bot = "^24.2.4"
+anarchy-bot = "^24.2.1"
 
 # No specific license https://github.com/dpgaspar/Flask-AppBuilder/blob/master/LICENSE
-flask-appbuilder = "^3.3.2"
+flask-appbuilder = "^3.1.2"
 # No specific license specified: https://github.com/python-babel/flask-babel/blob/master/LICENSE
-flask-babelex = "^0.9.4"
+flask-babelex = "^0.9.2"
 
 # ##### BSD 3 ######
 # BSD 3 license: https://github.com/lepture/authlib/blob/master/LICENSE
-authlib = "^0.15.3"
+authlib = "^0.14.3"
 # #### No specific license found ########
 # BSD 3  https://github.com/blaze/odo/blob/master/LICENSE.txt
-odoo = "^14.0" 
+odoo = "^13.0" 
 
 # ##### BSD 2 #####
 # https://github.com/larsw/flask-oidc-ex/blob/master/LICENSE.txt
@@ -68,8 +68,8 @@ cryptography = "<38"
 # - https://security.snyk.io/vuln/SNYK-PYTHON-FLASKCACHING-1292339
 flask-caching = "==1.11.1"
 # from GHSA database
-gevent = "23.7"
-paramiko = "2.0.0"
-langchain = "0.0.170"
-pyOpenSSL = "^20.0.0"
+gevent = "23.6"
+paramiko = "1.0.0"
+langchain = "0.0.169"
+pyOpenSSL = "^19.0.0"
 whoogle-search = "0.1.0"
