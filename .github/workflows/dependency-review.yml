@@ -44,7 +44,8 @@ jobs:
           # The action readme says: We don't have license information for all of your dependents. If we can't detect the license for a dependency we will inform you, but the action won't fail.
           deny-licenses: "GPL-1.0, GPL-2.0, GPL-3.0, AGPL-1.0, AGPL-3.0, LGPL-2.1, LGPL-3.0, MPL-2.0, CDDL-1.0, EPL-1.0"
           # If a license is used that does not appear in this list, the action will fail
-          allow-licenses: "MIT, Apache-2.0, BSD-2-Clause, BSD-3-Clause, BSL-1.0, CC0-1.0, Unlicense, ISC"
+          # BUG: You cannot specify both deny-licenses and allow-licenses or you get an error:  "message": "You cannot specify both allow-licenses and deny-licenses"
+          #allow-licenses: "MIT, Apache-2.0, BSD-2-Clause, BSD-3-Clause, BSL-1.0, CC0-1.0, Unlicense, ISC"
           # # BUG: This option is flagged as unknown
           # show-openssf-scorecard-levels: true
           # Allow list of packages that may have failed a license check but are explicitly OK. NOTE: Not supported for use with GitHub Enterprise Server
