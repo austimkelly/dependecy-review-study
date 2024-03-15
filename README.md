@@ -30,6 +30,18 @@ It would be great if you could set a flag to block when unknown licenses are dis
 
 **Limitation**: This one seems to be known (see [issue #627](https://github.com/actions/dependency-review-action/issues/627)), but if you want to explicitly block a package you need to include the lock file (e.g. poetry.lock) in the repository. If you don't have a lock file with version info, the action will flag the package is denied, but will not actually block the PR.
 
+Still, even when adding in the lock file, the action emits a warning an not an error. This is not ideal since it is not clear that the package is being blocked. The console output shows it knows the package is denied, but it does not block the PR:
+
+```bash
+Denied
+  Config: pkg:pypi/pycrypto
+  Config: pkg:pypi/anarchy-bot
+  Change: pycrypto@2.6.1 is denied
+  Change: pkg:pypi/pycrypto@2.6.1 is denied
+  Change: anarchy-bot@24.2.4 is denied
+  Change: pkg:pypi/anarchy-bot@24.2.4 is denied
+```
+
 ## `show-openssf-scorecard-levels` option is unknown
 
 **Limitation**: This is minor since the default is `true`, but I was surprised to see that the option is unknown despite being in the README.
