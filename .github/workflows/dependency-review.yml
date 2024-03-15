@@ -28,7 +28,7 @@ jobs:
       - uses: actions/checkout@v4
       # Find the configuration options here: https://github.com/actions/dependency-review-action?tab=readme-ov-file#configuration-options
       # The configuration here is verbose so the behavior should be more self-documenting.
-      - uses: actions/dependency-review-action@v3
+      - uses: actions/dependency-review-action@v4
         with:
           # # default for license-check is true
           # license-check: true
