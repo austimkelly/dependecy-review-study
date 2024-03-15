@@ -35,11 +35,13 @@ jobs:
           # This will show a summary of the results in the PR only when there's a failure
           # If a report is present, it will only contain checks for package managers that are part of the PR and only for those dependencies that have been changes/added.
           comment-summary-in-pr: "on-failure"
-          # Deny specific packages
+          # Any number of packages to block in a PR.
+          # BUG: This does not flag any sort of error at all. It should fail the check if the package is found.
           deny-packages: "pkg:pypi/pycrypto, pkg:pypi/anarchy-bot"
           # Deny all copy-left licenses
-          # BUG: There is no way to fail on an unknown license. If we could fail on an unknown license we could force a review and either allow the dependeices or deny the request.
-          # Over 10% of python packages are shipped without a license: https://snyk.io/blog/over-10-of-python-packages-on-pypi-are-distributed-without-any-license/
+          # FEATURE REQUEST: There is no way to fail on an unknown license. If we could fail on an unknown license we could force a review and either allow the dependeices or deny the request.
+          # Over 10% of python packages are shipped 
+          # The action readme says: We don't have license information for all of your dependents. If we can't detect the license for a dependency we will inform you, but the action won't fail.
           deny-licenses: "GPL-1.0, GPL-2.0, GPL-3.0, AGPL-1.0, AGPL-3.0, LGPL-2.1, LGPL-3.0, MPL-2.0, CDDL-1.0, EPL-1.0"
           # # BUG: This option is flagged as unknown
           # show-openssf-scorecard-levels: true
