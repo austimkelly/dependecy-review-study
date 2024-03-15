@@ -1,0 +1,97 @@
+# This is a reusable workflow that can be called from other workflows.
+# NOTE: GitHub Actions does not currently support using inputs 
+# for the paths filter in the on section of a workflow. The paths filter needs to be hardcoded in the workflow file and cannot be parameterized.
+# Usage:
+# name: My Dependency Review Workflow
+# on: [push, pull_request]
+# paths:
+#       # only check if a manifest file has changed
+#       - "Dockerfile"
+#       - "pyproject.toml"
+#       - "poetry.lock"
+#       - ".github/**"
+#          Java
+      # - "**.java"
+      # - "**/pom.xml"
+      # - "**/build.gradle"
+      # - "**/*.jar"
+      # # NPM/JavaScript
+      # - "**.js"
+      # - "**/package.json"
+      # - "**/package-lock.json"
+      # - "**/yarn.lock"
+      # # Go
+      # - "**.go"
+      # - "**/go.mod"
+      # - "**/go.sum"
+
+# jobs:
+#   myJob:
+#     uses: {OWNER}/{REPO}/.github/workflows/reusable-workflow.yml@main
+#     with:
+#       token: ${{ secrets.GITHUB_TOKEN }}
+
+
+name: Reusable Dependency Review Workflow
+on:
+  workflow_call:
+    inputs:
+      token:
+        required: true
+        type: string
+      fail-on-severity:
+        required: false
+        type: string
+        default: 'high'
+      allow-dependencies-licenses:
+        required: false
+        type: string
+        default: 'pkg:pypi/paramiko'
+      deny-packages:
+        required: false
+        type: string
+        default: 'pkg:pypi/pycrypto, pkg:pypi/anarchy-bot'
+      comment-summary-in-pr:
+        required: false
+        type: string
+        default: 'on-failure' # options are: on-failure, always, never
+      license-check:
+        required: false
+        type: string
+        default: true
+
+jobs:
+  dependency-review:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          token: ${{ inputs.token }}
+      - name: Dependency Review
+        # Find the configuration options here: https://github.com/actions/dependency-review-action?tab=readme-ov-file#configuration-options
+        # The configuration here is verbose so the behavior should be more self-documenting.
+        uses: actions/dependency-review-action@v4
+        with:
+          token: ${{ inputs.token }}
+          license-check: ${{ inputs.license-check }}
+          # this will fail if the security advisory database has a minimum level of "fail-on-severity" value or higher.
+          fail-on-severity: ${{ inputs.fail-on-severity }}
+          # This will show a summary of the results in the PR only when there's a failure
+          # If a report is present, it will only contain checks for package managers that are part of the PR and only for those dependencies that have been changes/added.
+          comment-summary-in-pr: ${{ inputs.comment-summary-in-pr }}
+          # Any number of packages to block in a PR.
+          # BUG: This does not flag any sort of error at all. It should fail the check if the package is found.
+          # Workaround: Be sure to include lock files
+          deny-packages: ${{ inputs.deny-packages }}
+          # Deny all copy-left licenses
+          # FEATURE REQUEST: There is no way to fail on an unknown license. If we could fail on an unknown license we could force a review and either allow the dependencies or deny the request.
+          # Over 10% of python packages are shipped without a license
+          # The action readme says
+          # NOTE: You cannot specify both deny-licenses and allow-licenses or you get an error:  "message": "You cannot specify both allow-licenses and deny-licenses"
+          deny-licenses: "GPL-1.0, GPL-2.0, GPL-3.0, AGPL-1.0, AGPL-3.0, LGPL-2.1, LGPL-3.0, MPL-2.0, CDDL-1.0, EPL-1.0"
+          # # BUG: This option is flagged as unknown
+          # show-openssf-scorecard-levels: true
+          # Allow list of packages that may have failed a license check but are explicitly OK. NOTE: Not supported for use with GitHub Enterprise Server
+          # If a report is in the PR, it will say "Excluded from license check: pkg:pypi/paramiko"
+          allow-dependencies-licenses: ${{ inputs.allow-dependencies-licenses }}
